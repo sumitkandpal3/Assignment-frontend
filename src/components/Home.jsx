@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import heroImage from '/hero.webp';
 import API from "../../utils/API";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
- 
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
 
@@ -58,12 +58,12 @@ const Home = () => {
             <p className="text-xl mb-6">
               Discover our exclusive collection now!
             </p>
-            <a
-              href="/products"
+            <Link
+              to="/products"
               className="bg-blue-500 text-white py-3 px-6 rounded hover:bg-blue-600"
             >
               Shop Now
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -82,9 +82,9 @@ const Home = () => {
               className="mx-auto mb-4"
             />
             <h3 className="text-lg font-semibold mb-2">Electronics</h3>
-            <a href="/products" className="text-blue-500 hover:underline">
+            <Link to="/products" className="text-blue-500 hover:underline">
               Explore Electronics
-            </a>
+            </Link>
           </div>
           <div className="bg-white shadow-md rounded-lg p-4 text-center">
             <img
@@ -93,9 +93,9 @@ const Home = () => {
               className="mx-auto mb-4"
             />
             <h3 className="text-lg font-semibold mb-2">Fashion</h3>
-            <a href="/products" className="text-blue-500 hover:underline">
+            <Link to="/products" className="text-blue-500 hover:underline">
               Discover Fashion
-            </a>
+            </Link>
           </div>
           <div className="bg-white shadow-md rounded-lg p-4 text-center">
             <img
@@ -104,9 +104,9 @@ const Home = () => {
               className="mx-auto mb-4"
             />
             <h3 className="text-lg font-semibold mb-2">Home Appliances</h3>
-            <a href="/products" className="text-blue-500 hover:underline">
+            <Link to="/products" className="text-blue-500 hover:underline">
               Browse Home Appliances
-            </a>
+            </Link>
           </div>
         </div>
       </section>
