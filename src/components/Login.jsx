@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../../utils/API";
 import UserState from "../context/user/userState";
 import UserContext from "../context/user/userContext";
@@ -10,11 +10,11 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const {setIsLoggedIn, userLogin} = useContext(UserContext);
+  const { setIsLoggedIn, userLogin } = useContext(UserContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await userLogin({email, password});
+      const data = await userLogin({ email, password });
       if (data?.success) {
         localStorage.setItem("token", data?.token);
         navigate("/");
@@ -71,9 +71,9 @@ const Login = () => {
           </button>
           <p className="text-center text-gray-600 mt-4">
             Don't have an account?{" "}
-            <a href="/signup" className="text-blue-500">
+            <Link to="/signup" className="text-blue-500">
               Sign Up
-            </a>
+            </Link>
           </p>
         </form>
       </div>

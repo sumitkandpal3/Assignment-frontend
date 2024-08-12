@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../../utils/API";
 import UserState from "../context/user/userState";
 import UserContext from "../context/user/userContext";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -112,9 +113,9 @@ const SignUp = () => {
           </button>
           <p className="text-center text-gray-600 mt-4">
             Already have an account?{" "}
-            <a href="/login" className="text-blue-500">
+            <Link to="/login" className="text-blue-500">
               Login
-            </a>
+            </Link>
           </p>
         </form>
       </div>
