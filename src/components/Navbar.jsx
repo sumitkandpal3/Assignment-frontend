@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-lg font-bold">
-          <Link to="/">MyStore</Link> {/* Replace <a> with <Link> */}
+          <Link to="/">MyStore</Link> 
         </div>
         <div className="hidden md:flex space-x-4">
           <Link to="/" className="text-white hover:text-gray-300">
