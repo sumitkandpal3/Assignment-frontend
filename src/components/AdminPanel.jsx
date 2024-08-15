@@ -20,7 +20,11 @@ const AdminPanel = () => {
   const fileInputRef = useRef(null);
   const fileInputRef2 = useRef(null);
 
+  const navigate = useNavigate();
 
+  const handleUpdate = async (id) => {
+    navigate(`/admin/product/update/${id}`);
+  };
 
   const fetchData = async () => {
     try {
@@ -33,17 +37,16 @@ const AdminPanel = () => {
     }
   };
 
- const handleCategory = async() => {
-  if (!cat) return;
-  try {
-    const {data} = await API.post("/categories/create", {name: cat});
-    setCat("");
-    fetchData();
-  }
-  catch(e) {
-    setError("Failed to add category");
-  }
- }
+  const handleCategory = async () => {
+    if (!cat) return;
+    try {
+      const { data } = await API.post("/categories/create", { name: cat });
+      setCat("");
+      fetchData();
+    } catch (e) {
+      setError("Failed to add category");
+    }
+  };
 
   const handleChange = (event) => {
     setLoading(true);
@@ -186,8 +189,6 @@ const AdminPanel = () => {
   };
 
   useEffect(() => {
-    
-
     fetchData();
   }, []);
 
@@ -258,16 +259,21 @@ const AdminPanel = () => {
               Add new category
             </label>
             <div className="flex">
-            <input
-              type="text"
-              value={cat}
-              onChange={(e) => setCat(e.target.value)}
-              className="p-1 border border-gray-300 rounded"
-            />
-            <div className="btn px-2 py-1 bg-blue-300" onClick={handleCategory}>Add</div>
+              <input
+                type="text"
+                value={cat}
+                onChange={(e) => setCat(e.target.value)}
+                className="p-1 border border-gray-300 rounded"
+              />
+              <div
+                className="btn px-2 py-1 bg-blue-300"
+                onClick={handleCategory}
+              >
+                Add
+              </div>
             </div>
           </div>
-          
+
           <div className="mb-4">
             <label
               htmlFor="category"
@@ -379,12 +385,20 @@ const AdminPanel = () => {
                 <td className="px-4 py-2 border-b">{product.price}</td>
                 <td className="px-4 py-2 border-b">{product.category.name}</td>
                 <td className="px-4 py-2 border-b">
-                  <button
-                    onClick={() => handleDeleteProduct(product._id)}
-                    className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
+                  <div className="flex">
+                    <button
+                      onClick={() => handleDeleteProduct(product._id)}
+                      className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={() => handleUpdate(product._id)}
+                      className="bg-gray-500 text-white py-1 px-3 rounded hover:bg-gray-600"
+                    >
+                      Update
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

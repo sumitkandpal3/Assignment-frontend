@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import AdminPanel from "./components/AdminPanel";
 import ProductDetail from "./components/ProductDetail";
+import UpdateProduct from "./components/UpdateProduct";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/admin/product/update/:id" element={<UpdateProduct />} />
           </Routes>
         </div>
         <Footer />
