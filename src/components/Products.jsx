@@ -95,12 +95,12 @@ const Products = () => {
           {filteredProducts.length > 0 &&
             filteredProducts?.map((product) => (
               <div
-                key={product.id}
+                key={product?.id}
                 className="bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-lg flex flex-col justify-between py-4 overflow-hidden border border-gray-300"
               >
                 <img
-                  src={product.thumbnail}
-                  alt={product.name}
+                  src={product?.thumbnail}
+                  alt={product?.name}
                   className="w-full h-48 object-contain"
                 />
                 <div className="p-4">
@@ -108,11 +108,11 @@ const Products = () => {
                     {product.name}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    Category: {product.category.name}
+                    Category: {product?.category?.name}
                   </p>
                   <p className="text-xl font-bold mb-4">₹{product.price}</p>
                   <Link
-                    to={`/products/${product._id}`}
+                    to={`/products/${product?._id}`}
                     className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                   >
                     View Details
