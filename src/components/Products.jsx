@@ -96,7 +96,7 @@ const Products = () => {
             filteredProducts?.map((product) => (
               <div
                 key={product.id}
-                className="bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-lg overflow-hidden border border-gray-300"
+                className="bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-lg flex flex-col justify-between py-4 overflow-hidden border border-gray-300"
               >
                 <img
                   src={product.thumbnail}
