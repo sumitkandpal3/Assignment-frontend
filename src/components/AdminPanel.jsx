@@ -4,7 +4,6 @@ import API from "../../utils/API";
 import axios from "axios";
 
 const AdminPanel = () => {
-  const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -20,30 +19,26 @@ const AdminPanel = () => {
   const fileInputRef = useRef(null);
   const fileInputRef2 = useRef(null);
 
-
-
   const fetchData = async () => {
     try {
-      const productRes = await API.get("/products/all");
       const categoryRes = await API.get("/categories/all");
-      setProducts(productRes.data.products);
+
       setCategories(categoryRes.data.categories);
     } catch (err) {
       setError("Failed to fetch data");
     }
   };
 
- const handleCategory = async() => {
-  if (!cat) return;
-  try {
-    const {data} = await API.post("/categories/create", {name: cat});
-    setCat("");
-    fetchData();
-  }
-  catch(e) {
-    setError("Failed to add category");
-  }
- }
+  const handleCategory = async () => {
+    if (!cat) return;
+    try {
+      const { data } = await API.post("/categories/create", { name: cat });
+      setCat("");
+      fetchData();
+    } catch (e) {
+      setError("Failed to add category");
+    }
+  };
 
   const handleChange = (event) => {
     setLoading(true);
@@ -171,32 +166,15 @@ const AdminPanel = () => {
     }
   };
 
-  const handleDeleteProduct = async (productId) => {
-    try {
-      const { data } = await API.delete(`/products/delete/${productId}`);
-      if (data.success) {
-        // setProducts(products.filter((product) => product._id !== productId));
-        fetchData();
-      } else {
-        setError("Failed to delete product");
-      }
-    } catch (err) {
-      setError("Failed to delete product");
-    }
-  };
-
   useEffect(() => {
-    
-
     fetchData();
   }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Add New Product</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Add New Product</h2>
         <form
           onSubmit={handleAddProduct}
           className="bg-white p-6 rounded shadow-md"
@@ -258,16 +236,21 @@ const AdminPanel = () => {
               Add new category
             </label>
             <div className="flex">
-            <input
-              type="text"
-              value={cat}
-              onChange={(e) => setCat(e.target.value)}
-              className="p-1 border border-gray-300 rounded"
-            />
-            <div className="btn px-2 py-1 bg-blue-300" onClick={handleCategory}>Add</div>
+              <input
+                type="text"
+                value={cat}
+                onChange={(e) => setCat(e.target.value)}
+                className="p-1 border border-gray-300 rounded"
+              />
+              <div
+                className="btn px-2 py-1 bg-blue-300"
+                onClick={handleCategory}
+              >
+                Add
+              </div>
             </div>
           </div>
-          
+
           <div className="mb-4">
             <label
               htmlFor="category"
@@ -360,36 +343,6 @@ const AdminPanel = () => {
             </button>
           )}
         </form>
-      </div>
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Product List</h2>
-        <table className="min-w-full bg-white border border-gray-300 rounded shadow-md">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 border-b">Name</th>
-              <th className="px-4 py-2 border-b">Price</th>
-              <th className="px-4 py-2 border-b">Category</th>
-              <th className="px-4 py-2 border-b">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products?.map((product) => (
-              <tr key={product._id}>
-                <td className="px-4 py-2 border-b">{product.name}</td>
-                <td className="px-4 py-2 border-b">{product.price}</td>
-                <td className="px-4 py-2 border-b">{product.category.name}</td>
-                <td className="px-4 py-2 border-b">
-                  <button
-                    onClick={() => handleDeleteProduct(product._id)}
-                    className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );

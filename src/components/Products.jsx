@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
 const Products = () => {
-  
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -12,7 +11,7 @@ const Products = () => {
     const getAllProducts = async () => {
       try {
         const { data } = await API.get("/products/all");
-       
+
         let updatedProducts = data?.products?.filter(
           (product) =>
             (selectedCategory === "All" ||
@@ -32,8 +31,6 @@ const Products = () => {
     };
     getAllProducts();
   }, [searchTerm, selectedCategory, sortOrder]);
-
-
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -56,7 +53,7 @@ const Products = () => {
       </header>
 
       {/* Filter and Search Section */}
-      <section className="container mx-auto py-8">
+      <section className="container mx-auto py-8 px-5 md:px-10 ">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
           {/* Search Bar */}
           <input
@@ -93,33 +90,36 @@ const Products = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="container mx-auto py-8">
+      <section className="container mx-auto py-8 px-5 md:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {filteredProducts.length>0 && filteredProducts?.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white shadow-md rounded-lg overflow-hidden"
-            >
-              <img
-                src={product.thumbnail}
-                alt={product.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4">
-                  Category: {product.category.name}
-                </p>
-                <p className="text-xl font-bold mb-4">₹{product.price}</p>
-                <Link
-                  to={`/products/${product._id}`}
-                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                >
-                  View Details
-                </Link>
+          {filteredProducts.length > 0 &&
+            filteredProducts?.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-lg flex flex-col justify-between py-4 overflow-hidden border border-gray-300"
+              >
+                <img
+                  src={product.thumbnail}
+                  alt={product.name}
+                  className="w-full h-48 object-contain"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2 truncate max-w-full">
+                    {product.name}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Category: {product.category.name}
+                  </p>
+                  <p className="text-xl font-bold mb-4">₹{product.price}</p>
+                  <Link
+                    to={`/products/${product._id}`}
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </section>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import heroImage from '/hero.webp';
+import heroImage from "/hero.webp";
 import API from "../../utils/API";
 
 const Home = () => {
@@ -12,9 +12,9 @@ const Home = () => {
     const fetchCategoriesAndProducts = async () => {
       try {
         setLoading(true);
-        
+
         const productsResponse = await API.get("/products/all");
-        
+
         setProducts(productsResponse.data.products);
       } catch (error) {
         setError(error.message);
@@ -22,7 +22,7 @@ const Home = () => {
         setLoading(false);
       }
     };
-    
+
     fetchCategoriesAndProducts();
   }, []);
 
@@ -69,18 +69,14 @@ const Home = () => {
       </section>
 
       {/* Featured Categories Section */}
-      <section className="container mx-auto py-16">
+      <section className="container mx-auto py-16 px-5 md:px-12">
         <h2 className="text-2xl font-bold text-center mb-8">
           Featured Categories
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Sample Category */}
           <div className="bg-white shadow-md rounded-lg p-4 text-center">
-            <img
-              src="/phones.webp"
-              alt="Category 1"
-              className="mx-auto mb-4"
-            />
+            <img src="/phones.webp" alt="Category 1" className="mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Electronics</h3>
             <Link to="/products" className="text-blue-500 hover:underline">
               Explore Electronics
@@ -112,7 +108,7 @@ const Home = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="container mx-auto py-16">
+      <section className="container mx-auto py-16 px-5 md:px-12">
         <h2 className="text-2xl font-bold text-center mb-8">
           Featured Products
         </h2>
@@ -121,16 +117,23 @@ const Home = () => {
         ) : error ? (
           <p className="text-red-500">Error: {error}</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {products.map((product) => (
-              <div key={product._id} className="bg-white shadow-md rounded-lg p-4 text-center">
+              <div
+                key={product._id}
+                className="bg-white shadow-md rounded-lg p-4 text-center"
+              >
                 <img
                   src={product?.thumbnail || "https://via.placeholder.com/150"}
                   alt={product.name}
-                  className="mx-auto mb-4"
+                  className="mx-auto w-full h-48 mb-4 object-contain"
                 />
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4">Category: {product.category.name}</p>
+                <h3 className="text-lg font-semibold mb-2 w-full truncate">
+                  {product.name}
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Category: {product.category.name}
+                </p>
                 <button
                   onClick={() => handleAddToCart(product._id)}
                   className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
