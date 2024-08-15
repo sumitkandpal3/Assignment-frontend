@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import AdminPanel from "./components/AdminPanel";
 import ProductDetail from "./components/ProductDetail";
+import UpdateProduct from "./components/UpdateProduct";
 import Dashboard from "./components/Admin/Dashboard";
 import AdminLayout from "./components/Admin/AdminLayout";
 import Layout from "./components/Layout";
@@ -33,6 +34,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="product/create" element={<AdminPanel />} />
           <Route path="products/all" element={<AllProducts />} />
+          <Route path="product/update/:id" element={<UpdateProduct />} />
         </Route>
       </Routes>
     </Router>

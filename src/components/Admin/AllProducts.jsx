@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import API from "../../../utils/API";
+import { useNavigate } from "react-router-dom";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const fetchData = async () => {
     try {
       const productRes = await API.get("/products/all");
@@ -11,6 +13,9 @@ const AllProducts = () => {
     } catch (err) {
       setError("Failed to fetch data");
     }
+  };
+  const handleUpdate = async (id) => {
+    navigate(`/admin/product/update/${id}`);
   };
   const handleDeleteProduct = async (productId) => {
     try {
@@ -65,7 +70,7 @@ const AllProducts = () => {
                 <td className="px-4 py-2 border-b">{product.category.name}</td>
                 <td className="px-4 py-2 border-b">
                   <button
-                    onClick={() => handleDeleteProduct(product._id)}
+                    onClick={() => handleUpdate(product._id)}
                     className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
                   >
                     Edit
