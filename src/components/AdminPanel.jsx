@@ -19,12 +19,6 @@ const AdminPanel = () => {
   const fileInputRef = useRef(null);
   const fileInputRef2 = useRef(null);
 
-  const navigate = useNavigate();
-
-  const handleUpdate = async (id) => {
-    navigate(`/admin/product/update/${id}`);
-  };
-
   const fetchData = async () => {
     try {
       const categoryRes = await API.get("/categories/all");
@@ -349,44 +343,6 @@ const AdminPanel = () => {
             </button>
           )}
         </form>
-      </div>
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Product List</h2>
-        <table className="min-w-full bg-white border border-gray-300 rounded shadow-md">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 border-b">Name</th>
-              <th className="px-4 py-2 border-b">Price</th>
-              <th className="px-4 py-2 border-b">Category</th>
-              <th className="px-4 py-2 border-b">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products?.map((product) => (
-              <tr key={product._id}>
-                <td className="px-4 py-2 border-b">{product.name}</td>
-                <td className="px-4 py-2 border-b">{product.price}</td>
-                <td className="px-4 py-2 border-b">{product.category.name}</td>
-                <td className="px-4 py-2 border-b">
-                  <div className="flex">
-                    <button
-                      onClick={() => handleDeleteProduct(product._id)}
-                      className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
-                    >
-                      Delete
-                    </button>
-                    <button
-                      onClick={() => handleUpdate(product._id)}
-                      className="bg-gray-500 text-white py-1 px-3 rounded hover:bg-gray-600"
-                    >
-                      Update
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );

@@ -34,6 +34,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="product/create" element={<AdminPanel />} />
           <Route path="products/all" element={<AllProducts />} />
+          <Route path="product/update/:id" element={<UpdateProduct />} />
         </Route>
       </Routes>
     </Router>

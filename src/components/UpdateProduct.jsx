@@ -236,7 +236,7 @@ const UpdateProduct = () => {
         </div>
         <div className="mb-4">
           {product.thumbnail && (
-            <div className="relative w-[10rem]">
+            <div className="relative w-[10rem] z-0">
               <img
                 src={product.thumbnail}
                 alt={`add thumbnail`}
