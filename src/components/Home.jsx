@@ -118,21 +118,21 @@ const Home = () => {
           <p className="text-red-500">Error: {error}</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {products.map((product) => (
+            {products?.map((product) => (
               <div
-                key={product._id}
+                key={product?._id}
                 className="bg-white shadow-md rounded-lg p-4 text-center"
               >
                 <img
                   src={product?.thumbnail || "https://via.placeholder.com/150"}
-                  alt={product.name}
+                  alt={product?.name}
                   className="mx-auto w-full h-48 mb-4 object-contain"
                 />
                 <h3 className="text-lg font-semibold mb-2 w-full truncate">
-                  {product.name}
+                  {product?.name}
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Category: {product.category.name}
+                  Category: {product?.category?.name}
                 </p>
                 <button
                   onClick={() => handleAddToCart(product._id)}
