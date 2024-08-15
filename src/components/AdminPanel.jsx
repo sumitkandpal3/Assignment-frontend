@@ -4,7 +4,6 @@ import API from "../../utils/API";
 import axios from "axios";
 
 const AdminPanel = () => {
-  const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -28,9 +27,8 @@ const AdminPanel = () => {
 
   const fetchData = async () => {
     try {
-      const productRes = await API.get("/products/all");
       const categoryRes = await API.get("/categories/all");
-      setProducts(productRes.data.products);
+
       setCategories(categoryRes.data.categories);
     } catch (err) {
       setError("Failed to fetch data");
@@ -174,30 +172,15 @@ const AdminPanel = () => {
     }
   };
 
-  const handleDeleteProduct = async (productId) => {
-    try {
-      const { data } = await API.delete(`/products/delete/${productId}`);
-      if (data.success) {
-        // setProducts(products.filter((product) => product._id !== productId));
-        fetchData();
-      } else {
-        setError("Failed to delete product");
-      }
-    } catch (err) {
-      setError("Failed to delete product");
-    }
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Add New Product</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Add New Product</h2>
         <form
           onSubmit={handleAddProduct}
           className="bg-white p-6 rounded shadow-md"
