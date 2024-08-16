@@ -67,7 +67,7 @@ const AllProducts = () => {
                 </td>
                 <td className="px-4 py-2 border-b">{product.name}</td>
                 <td className="px-4 py-2 border-b">{product.price}</td>
-                <td className="px-4 py-2 border-b">{product.category.name}</td>
+                <td className="px-4 py-2 border-b">{product?.category?.name}</td>
                 <td className="px-4 py-2 border-b">
                   <button
                     onClick={() => handleUpdate(product._id)}

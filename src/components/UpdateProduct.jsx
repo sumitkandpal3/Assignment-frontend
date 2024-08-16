@@ -221,7 +221,7 @@ const UpdateProduct = () => {
           <select
             id="category"
             name="category"
-            value={product.category.name}
+            value={product?.category?.name}
             onChange={handleInputChange}
             required
             className="w-full p-3 border border-gray-300 rounded"

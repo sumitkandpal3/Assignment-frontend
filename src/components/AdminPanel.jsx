@@ -22,8 +22,7 @@ const AdminPanel = () => {
   const fetchData = async () => {
     try {
       const categoryRes = await API.get("/categories/all");
-
-      setCategories(categoryRes.data.categories);
+      setCategories(categoryRes?.data?.categories ?? []);
     } catch (err) {
       setError("Failed to fetch data");
     }
@@ -48,7 +47,7 @@ const AdminPanel = () => {
       const reader = new FileReader();
 
       reader.onloadend = async () => {
-        const base64Image = reader.result;
+        const base64Image = reader?.result;
 
         // Prepare the form data to send to Cloudinary
         const formData = { file: base64Image, upload_preset: "chat-app" };
@@ -61,7 +60,7 @@ const AdminPanel = () => {
           );
 
           // Get the URL of the uploaded image
-          const cloudinaryUrl = response.data.secure_url;
+          const cloudinaryUrl = response?.data?.secure_url;
 
           // Set the thumbnail to the Cloudinary URL
           setThumbnail(cloudinaryUrl);
@@ -84,7 +83,7 @@ const AdminPanel = () => {
       filesArray.forEach((file, index) => {
         const reader = new FileReader();
         reader.onloadend = async () => {
-          const base64Image = reader.result;
+          const base64Image = reader?.result;
 
           // Prepare the form data to send to Cloudinary
           const formData = { file: base64Image, upload_preset: "chat-app" };
@@ -98,7 +97,7 @@ const AdminPanel = () => {
             );
 
             // Get the URL of the uploaded image
-            const cloudinaryUrl = response.data.secure_url;
+            const cloudinaryUrl = response?.data?.secure_url;
 
             urls.push(cloudinaryUrl);
 
@@ -140,9 +139,8 @@ const AdminPanel = () => {
       setLoading(true);
       const { data } = await API.post("/products/create", bodyData);
 
-      if (data.success) {
+      if (data?.success) {
         fetchData();
-        // setProducts([...products, data.product]);
         setName("");
         setDescription("");
         setStock("");
@@ -266,9 +264,9 @@ const AdminPanel = () => {
               className="w-full p-3 border border-gray-300 rounded"
             >
               <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat.name}>
-                  {cat.name}
+              {categories?.map((cat) => (
+                <option key={cat?._id} value={cat?.name}>
+                  {cat?.name}
                 </option>
               ))}
             </select>
